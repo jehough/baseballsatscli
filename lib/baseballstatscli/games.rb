@@ -1,11 +1,15 @@
 class Baseballstatscli::Games
     attr_accessor :game, :away_team, :home_team, :away_score, :home_score, :winner, :winning_pitcher, :loser, :losing_pitcher
     @@all = []
+    @@winners = []
+    @@losers = []
     def initialize(team1, team2, game)
         @game = "#{team1} vs #{team2}"
         attrs_from_hash(game)
         find_winner
         @@all << self
+        @@winners << self.winner
+        @@losers << self.losers
     end
     def self.create_from_array(games)
         games.each do |game|
@@ -27,6 +31,12 @@ class Baseballstatscli::Games
         self.winner = self.home_team
         self.loser = self.away_team
         end
+    end
+    def self.winners
+        @@winners
+    end
+    def self.losers
+        @@losers
     end
     def self.all
         @@all
