@@ -1,8 +1,10 @@
 class Baseballstatscli::Cli
     def call
+        while @input != 'exit'
         make_games
         list_games
         get_user_input
+        end
     end
     def list_games
         Baseballstatscli::Game.all.each_with_index do |info, i|
@@ -14,14 +16,14 @@ class Baseballstatscli::Cli
         Baseballstatscli::Game.create_from_array(games_array)
     end
     def get_user_input
-        puts "Select a game by number above or for a list of winners type 'W' or if you would like to be depressed and want to see a list of losers, type 'L':"
+        puts "Select a game by number above or for a list of" + "winners".colorize(:red) + "type 'W' or if you would like to be" + "depressed".colorize(:blue) + "and want to see a list of losers, type 'L':"
         @input = gets.chomp
-        if input.upcase == 'W'
+        if @input.upcase == 'W'
             winner_list
-        elsif input.upcase == 'L'
+        elsif @input.upcase == 'L'
             loser_list
         else
-            validate_input(input)
+            validate_input
         end
     end
     def winner_list
@@ -37,6 +39,18 @@ class Baseballstatscli::Cli
             puts (i + 1).to_s + ". #{team}"
         end
     end
-    def validate_input(input)
-        if input.to_i > Baseballstatscli::Game.all.length
+    def validate_input
+        if @input.to_i <= Baseballstatscli::Game.all.length
+            get_game_info
+        else
+            "Sorry, I didn't understand that, try again please:"
+            get_user_input
+        end
+    end
+    def get_game_info
+        input = @input
+        game_obj = Baseballstatscli::Game.find_by_index(input)
+    end
+
+
 end

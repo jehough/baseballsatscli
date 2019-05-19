@@ -34,7 +34,7 @@ class Baseballstatscli::Game
     end
     def self.find_by_id(input)
         index = input.to_i - 1
-        game = @@all[index]
+        game = self.all[index]
     end
     def self.winners
         @@winners
