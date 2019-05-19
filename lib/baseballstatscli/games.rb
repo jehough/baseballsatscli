@@ -1,4 +1,4 @@
-class Baseballstatscli::Games
+class Baseballstatscli::Game
     attr_accessor :game, :away_team, :home_team, :away_score, :home_score, :winner, :winning_pitcher, :loser, :losing_pitcher
     @@all = []
     @@winners = []
@@ -9,7 +9,7 @@ class Baseballstatscli::Games
         find_winner
         @@all << self
         @@winners << self.winner
-        @@losers << self.losers
+        @@losers << self.loser
     end
     def self.create_from_array(games)
         games.each do |game|
@@ -31,6 +31,10 @@ class Baseballstatscli::Games
         self.winner = self.home_team
         self.loser = self.away_team
         end
+    end
+    def self.find_by_id(input)
+        index = input.to_i - 1
+        game = @@all[index]
     end
     def self.winners
         @@winners
