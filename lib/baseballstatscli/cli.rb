@@ -15,11 +15,14 @@ class Baseballstatscli::Cli
     end
     def get_user_input
         puts "Select a game by number above or for a list of winners type 'W' or if you would like to be depressed and want to see a list of losers, type 'L':"
-        input = gets.chomp
-        if gets.chomp.upcase == 'W'
+        @input = gets.chomp
+        if input.upcase == 'W'
             winner_list
-        elsif gets.chomp.upcase == 'L'
+        elsif input.upcase == 'L'
             loser_list
+        else
+            validate_input(input)
+        end
     end
     def winner_list
         win_array = Baseballstatscli::Game.winners
@@ -34,5 +37,6 @@ class Baseballstatscli::Cli
             puts (i + 1).to_s + ". #{team}"
         end
     end
-
+    def validate_input(input)
+        if input.to_i > Baseballstatscli::Game.all.length
 end
