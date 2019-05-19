@@ -60,6 +60,4 @@ class Baseballstatscli::Cli
       end
       puts table.render(:unicode)
     end
-
-
 end
