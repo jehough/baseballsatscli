@@ -51,6 +51,15 @@ class Baseballstatscli::Cli
         input = @input
         game_obj = Baseballstatscli::Game.find_by_index(input)
     end
+    def create_table
+        game = get_game_info
+      if game.winner == game.home_team
+        table = TTY::Table.new ['Team', 'Score', 'Starting Pitcher'], [[game.away_team, game.away_score.to_s, game.losing_pitcher],[game.home_team, game.home_score.to_s, game.winning_pitcher].each {|e| e.colorize(:bold)} ]
+      else
+        table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher].each {|e| e.colorize(:bold)},[game.home_team, game.home_score.to_s , game.losing_pitcher]]
+      end
+      puts table.render(:unicode)
+    end
 
 
 end
