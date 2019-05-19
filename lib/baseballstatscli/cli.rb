@@ -1,7 +1,7 @@
 class Baseballstatscli::Cli
     def call
-        while @input != 'exit'
         make_games
+        while @input != 'exit'
         list_games
         get_user_input
         end
@@ -16,7 +16,7 @@ class Baseballstatscli::Cli
         Baseballstatscli::Game.create_from_array(games_array)
     end
     def get_user_input
-        puts "Select a game by number above or for a list of" + "winners".colorize(:red) + "type 'W' or if you would like to be" + "depressed".colorize(:blue) + "and want to see a list of losers, type 'L':"
+        puts "Select a game by number above or for a list of" + " winners".colorize(:red) + " type 'W' or if you would like to be" + " depressed".colorize(:blue) + " and want to see a list of losers, type 'L':"
         @input = gets.chomp
         if @input.upcase == 'W'
             winner_list
