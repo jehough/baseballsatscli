@@ -1,6 +1,8 @@
 require "baseballstatscli/version"
 require 'nokogiri'
 require 'open_uri'
+require 'colorize'
+require 'tty-table'
 
 require_relative 'baseballstatscli/games.rb'
 require_relative 'baseballstatscli/scraper.rb'

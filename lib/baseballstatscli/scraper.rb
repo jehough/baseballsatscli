@@ -1,7 +1,7 @@
 class Baseballstatscli::Scraper
   @@site = Nokogiri::HTML(open('https://www.baseball-reference.com/boxes/'))
 
-  def get_games
+  def self.get_games
     games = @@site.css('div.game_summaries').css('div.game_summary').map do |game|
     {
       :away_team => game.css('table.teams').css('tr').first.css('td').css('a').text.chomp,
