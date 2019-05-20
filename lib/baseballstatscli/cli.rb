@@ -41,7 +41,8 @@ class Baseballstatscli::Cli
     end
     def validate_input
         if @input.to_i <= Baseballstatscli::Game.all.length
-            get_game_info
+            game = get_game_info
+            create_table(game)
         else
             "Sorry, I didn't understand that, try again please:"
             get_user_input
@@ -49,15 +50,17 @@ class Baseballstatscli::Cli
     end
     def get_game_info
         input = @input
-        game_obj = Baseballstatscli::Game.find_by_index(input)
+        game_obj = Baseballstatscli::Game.find_by_id(input)
     end
-    def create_table
+    def create_table(game)
         game = get_game_info
       if game.winner == game.home_team
-        table = TTY::Table.new ['Team', 'Score', 'Starting Pitcher'], [[game.away_team, game.away_score.to_s, game.losing_pitcher],[game.home_team, game.home_score.to_s, game.winning_pitcher].each {|e| e.colorize(:bold)} ]
+        table = TTY::Table.new ['Team', 'Score', 'Starting Pitcher'], [[game.away_team, game.away_score.to_s, game.losing_pitcher],[game.home_team, game.home_score.to_s, game.winning_pitcher]]
       else
-        table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher].each {|e| e.colorize(:bold)},[game.home_team, game.home_score.to_s , game.losing_pitcher]]
+        table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher],[game.home_team, game.home_score.to_s , game.losing_pitcher]]
       end
       puts table.render(:unicode)
+      puts "finished? type 'exit' if not, press enter to select another game"
+      @input = gets.chomp
     end
 end

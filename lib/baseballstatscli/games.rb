@@ -15,7 +15,7 @@ class Baseballstatscli::Game
         games.each do |game|
         team1 = game[:away_team]
         team2 = game[:home_team]
-        Game.new(team1, team2, game)
+        self.new(team1, team2, game)
         end
     end
     def attrs_from_hash(game)

@@ -1,6 +1,6 @@
 require "baseballstatscli/version"
 require 'nokogiri'
-require 'open_uri'
+require 'open-uri'
 require 'colorize'
 require 'tty-table'
 
