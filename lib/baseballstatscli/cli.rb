@@ -30,7 +30,7 @@ class Baseballstatscli::Cli
         win_array = Baseballstatscli::Game.winners
         make_a_list(win_array)
     end
-    def loser_list(lose_array)
+    def loser_list
         lose_array = Baseballstatscli::Game.losers
         make_a_list(lose_array)
     end
@@ -61,10 +61,10 @@ class Baseballstatscli::Cli
         table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher],[game.home_team, game.home_score.to_s , game.losing_pitcher]]
       end
       puts table.render(:unicode)
-        last_line
+      last_line
     end
     def last_line
-        puts "finished? type 'exit' if not, press enter to select another game"
-        @input = gets.chomp
+      puts "finished? type 'exit' if not, press enter to select another game"
+      @input = gets.chomp
     end
 end
