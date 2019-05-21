@@ -66,4 +66,5 @@ class Baseballstatscli::Cli
     def last_line
         puts "finished? type 'exit' if not, press enter to select another game"
         @input = gets.chomp
+    end
 end
