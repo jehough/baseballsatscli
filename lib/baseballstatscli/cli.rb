@@ -55,11 +55,13 @@ class Baseballstatscli::Cli
     end
     def create_table(game)
         game = get_game_info
+        pastel = Pastel.new
       if game.winner == game.home_team
-        table = TTY::Table.new ['Team', 'Score', 'Starting Pitcher'], [[game.away_team, game.away_score.to_s, game.losing_pitcher],[game.home_team, game.home_score.to_s, game.winning_pitcher]]
+        table = TTY::Table.new ['Team', 'Score', 'Starting Pitcher'], [[game.away_team, game.away_score.to_s, game.losing_pitcher],[pastel.blue(game.home_team), pastel.blue(game.home_score.to_s), pastel.blue(game.winning_pitcher)]]
       else
-        table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher],[game.home_team, game.home_score.to_s , game.losing_pitcher]]
+        table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[pastel.blue(game.away_team), pastel.blue(game.away_score.to_s), pastel.blue(game.winning_pitcher)],[game.home_team, game.home_score.to_s , game.losing_pitcher]]
       end
+      puts "Winner in Blue".colorize(:blue)
       puts table.render(:unicode)
       last_line
     end
