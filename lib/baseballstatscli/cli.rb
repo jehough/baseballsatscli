@@ -38,6 +38,7 @@ class Baseballstatscli::Cli
         array.each_with_index do |team, i|
             puts (i + 1).to_s + ". #{team}"
         end
+        last_line
     end
     def validate_input
         if @input.to_i <= Baseballstatscli::Game.all.length
@@ -60,7 +61,9 @@ class Baseballstatscli::Cli
         table = TTY::Table.new ['Team', 'Score', 'pitcher'], [[game.away_team, game.away_score.to_s, game.winning_pitcher],[game.home_team, game.home_score.to_s , game.losing_pitcher]]
       end
       puts table.render(:unicode)
-      puts "finished? type 'exit' if not, press enter to select another game"
-      @input = gets.chomp
+        last_line
     end
+    def last_line
+        puts "finished? type 'exit' if not, press enter to select another game"
+        @input = gets.chomp
 end
