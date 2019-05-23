@@ -1,8 +1,6 @@
 # Baseballstatscli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/baseballstatscli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a gem designed to give scores and winning/losing pitchers for last nights baseball games.  It can also produce a winners list and losers list if that is what you would rather see.  After installing the gem and running the baseballstatscli file, it will give an interactive prompt that asks what game you want to see.
 
 ## Installation
 
