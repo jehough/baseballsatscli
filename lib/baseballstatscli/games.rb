@@ -16,11 +16,13 @@ class Baseballstatscli::Game
           self.new(team1, team2, game)
         end
     end
+
     def attrs_from_hash(game)
         game.each do |k, v|
           send("#{k}=", v)
         end
     end
+
     def find_winner
         if self.away_score > self.home_score
           self.winner = self.away_team
@@ -30,16 +32,20 @@ class Baseballstatscli::Game
         self.loser = self.away_team
         end
     end
+
     def self.find_by_id(input)
         index = input.to_i - 1
         game = self.all[index]
     end
+
     def self.winners
         self.all.map {|game| game.winner}
     end
+
     def self.losers
         self.all.map {|game| game.loser}
     end
+    
     def self.all
         @@all
     end
