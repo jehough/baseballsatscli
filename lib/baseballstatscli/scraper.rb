@@ -2,7 +2,7 @@ class Baseballstatscli::Scraper
   @@site = Nokogiri::HTML(open('https://www.baseball-reference.com/boxes/'))
 
   def self.get_games
-    games = []
+    #games = []
     @@site.css('div.game_summaries').css('div.game_summary').map do |game|
       hash = {
       :away_team => game.css('table.teams').css('tr').first.css('td').css('a')[0].text.chomp,
@@ -16,8 +16,9 @@ class Baseballstatscli::Scraper
         hash[:winning_pitcher] = game.css('table')[1].css('tr')[0].css('td')[1].text
         hash[:losing_pitcher] = game.css('table')[1].css('tr')[1].css('td')[1].text
       end
-      games << hash
+     # games << hash
+     hash
     end
-    games
+    #games
   end
 end  
